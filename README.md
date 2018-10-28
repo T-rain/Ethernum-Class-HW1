@@ -44,16 +44,39 @@ hash function 有很多種用途，以上述的 hash table 例子就是用來加
 
 Answer: 
 
-```sh
+Result:
+
+```shell
 privKey: 97b54511506d616e89cf873bcbf13fc7032942a3757e1cf6cdc49d772007920b
 pubKey: f8fb6b366cae2e7634a8fc23d7470c72f4ea3d097620dce552ef9c9524291b33fd4f4bc9ddea9300ce05acf0c3500d8c4a98784ecc349d53ec71f052a7297d9e
 address: 0xde7a40a1f05d7b90bfc69de6bdb5c23b96b3fdbf
 ```
 
+Source Code:
+
+```js
+const Wallet = require('ethereumjs-wallet');
+const keccak256 = require('js-sha3').keccak256;
+
+// keypair
+const wallet = Wallet.generate();
+ 
+// privKey
+const privKey = wallet.getPrivateKey();
+console.log("privKey:", privKey.toString('hex'));
+ 
+// pubKey
+const pubKey = wallet.getPublicKey();
+console.log("pubKey:", pubKey.toString('hex'));
+
+// address
+let address = wallet.getAddressString();
+console.log("address:", address);
+```
+
 ### (20%) b. In addition, if we don’t want to use the getAddressString() to get the address, how can we obtain the address by hashing the public key?
 
 Answer:
-
 ```js
 /***** address *****/
 
@@ -70,16 +93,34 @@ console.log("address:", address);
 // 20 bytes of string = 160 bits of string 
 // hex string is 4 bit per unit,and keccak256(pubKey) will return hex string
 // so we will get the last 160/4 = 40 unit of the hex string
-
 ```
 
 ### (30%) c. There is a file called Keystore that is used to encrypt the private key and save in a JSON file. Can you generate a Keystore with the password “nccu”? You can find the details about Keystore below.
 
 Answer:
 
-```sh
+```shell
+$ geth account new
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Passphrase:
+Repeat passphrase:
+Address: {b1d463feacb8f1ee509116a6aebf2bf3aa401bde}
+```
+
+```shell
+$ geth account list
+Account #0: {b1d463feacb8f1ee509116a6aebf2bf3aa401bde} keystore:/LocationToKeystore/UTC--2018-10-28T14-22-31.554716668Z--b1d463feacb8f1ee509116a6aebf2bf3aa401bde
+```
+
+```shell
+$ cd /LocationToKeystore
+```
+
+```shell
 $ cat UTC--2018-10-28T14-22-31.554716668Z--b1d463feacb8f1ee509116a6aebf2bf3aa401bde
 ```
+
+Result in json format
 
 ```json
 {
