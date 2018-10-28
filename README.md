@@ -38,13 +38,7 @@ hash function 有很多種用途，以上述的 hash table 例子就是用來加
 
 
 
-## (80%) 2. Peter is a noob in cryptocurrency and would like to get some Ethers. 
-First step for him is to have an Ethereum account. He decides to generate an account and manages the wallet himself so he can understand the principles behind. From the class, he knows the account is created by the following steps:
-Create a keypair of private/public key
-public_key = ECDSA(private_key)
-public_key_hash = Keccak-256(public_key)
-address = '0x' + last 20 bytes of public_key_hash
-
+## (80%) 2. Peter is a noob in cryptocurrency and would like to get some Ethers...
 
 ### (30%) a. Can you print the private/public key with hex string representation? Please give us an example.
 
